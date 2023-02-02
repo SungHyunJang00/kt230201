@@ -1,0 +1,17 @@
+N = int(input())
+
+count = 0
+
+a = N // 10
+b = N % 10
+
+while True:
+  tmp = b * 10 + ((a + b) % 10)
+  count += 1
+  if tmp == N:
+    break
+  else:
+    a = tmp // 10
+    b = tmp % 10
+
+print(count)
