@@ -1,0 +1,48 @@
+# Q1 Answer template
+
+def solution(lottos, win_nums):
+    answer = []
+
+    count = 0
+    countZero = 0
+
+    for i in range(len(lottos)):  # 0의 개수 파악
+        if lottos[i] == 0:
+            countZero += 1
+
+    for i in range(len(win_nums)):  # 맞춘 갯수 파악
+        for j in range(len(lottos)):
+            if win_nums[i] == lottos[j]:
+                count += 1
+
+    # 최고등수: 0을 전부 맞춘것과 똑같이 취급
+    if count + countZero == 0 or count + countZero == 1:  # 0개 또는 1개 맞춘경우 무조건 6등
+        answer.append(6)
+    else:
+        answer.append(7 - (count + countZero))  # 6등을 제외하고는 등수 + 맞춘 개수의 합 = 7
+
+    # 최악의 등수: 0을 전부 틀린것과 똑같이 취급
+    if count == 0 or count == 1:    # 0개 또는 1개 맞춘경우 무조건 6등
+        answer.append(6)
+    else:
+        answer.append(7 - count)    # 6등을 제외하고는 등수 + 맞춘 개수의 합 = 7
+
+    return answer
+
+lottos = [44, 1, 0, 0, 31, 25]
+win_nums = [31, 10, 45, 1, 6, 19]
+
+answer = solution(lottos, win_nums)
+print(answer)
+
+lottos2 = [0, 0, 0, 0, 0, 0]
+win_nums2 = [38, 19, 20, 40, 15, 25]
+
+answer2 = solution(lottos2, win_nums2)
+print(answer2)
+
+lottos3 = [45, 4, 35, 20, 3, 9]
+win_nums3 = [20, 9, 3, 45, 4, 35]
+
+answer3 = solution(lottos3, win_nums3)
+print(answer3)
